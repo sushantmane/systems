@@ -1,4 +1,4 @@
-### Laboratory Tutorial  
+## Laboratory Tutorial  
 ---
 
 Following notes are stolen directly from: http://pages.cs.wisc.edu/~remzi/OSTEP/lab-tutorial.pdf
