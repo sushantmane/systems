@@ -1,7 +1,7 @@
 ## Laboratory Tutorial  
 ---
 
-Following notes are stolen directly from: http://pages.cs.wisc.edu/~remzi/OSTEP/lab-tutorial.pdf
+Following content is lifted from: http://pages.cs.wisc.edu/~remzi/OSTEP/lab-tutorial.pdf
 
 ---
 ### Compilation Process
@@ -92,7 +92,7 @@ SYNOPSIS
 #### How to link library? (specify the library to the link-editor)
 ```
 # link math library
-gcc -o executable_name source.c -Wall -lm
+gcc -o executable source.c -Wall -lm
 
 # where
 -lXXX flag: tells the linker to look for libXXX.so or libXXX.a, probably in that order
