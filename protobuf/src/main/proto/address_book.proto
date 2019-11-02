@@ -1,21 +1,8 @@
-### Protocol Buffers
-
-> Google's data interchange format
-
-
-Protocol buffers are flexible, efficient, automated solution to serialize and retrieve structured data.
-
-
-
-
-#### Sample
-
-```proto3
 syntax = "proto3";
 
 package addressbook;
-
 option java_package = "edu.sjsu.cs.addressbook";
+option java_outer_classname = "AddressBookProtoBuffer";
 option java_multiple_files = true;
 
 message Person {
@@ -27,7 +14,7 @@ message Person {
         MOBILE = 0;
         HOME = 1;
         WORK = 2;
-    }
+    };
 
     message PhoneNumber {
         string number = 1;
@@ -38,6 +25,5 @@ message Person {
 }
 
 message AddressBook {
-    repeated Person people = 1;
+    repeated Person person = 1;
 }
-```
