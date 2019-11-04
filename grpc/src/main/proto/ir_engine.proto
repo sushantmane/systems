@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package ireng;
+option java_package = "edu.sjsu.cs.systems.grpc";
+option java_multiple_files = true;
+
+message SearchRequest {
+    string query = 1;
+    int32 k_results = 2;
+}
+
+message SearchResponse {
+    message Result {
+        int32 docID = 1;
+        float score = 2;
+    }
+    repeated Result results = 1;
+}
+
+service SearchService {
+    rpc Search (SearchRequest) returns (SearchResponse);
+}
+
+
