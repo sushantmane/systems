@@ -6,16 +6,15 @@ import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
-import org.apache.zookeeper.data.ACL;
-import org.apache.zookeeper.data.Id;
 import org.apache.zookeeper.data.Stat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class ZkClient implements Watcher {
+
+//    private static final Logger LOG = LoggerFactory.getLogger(ZkClient.class);
 
     private ZooKeeper zk;
 
@@ -27,30 +26,30 @@ public class ZkClient implements Watcher {
     public void process(WatchedEvent event) {
     }
 
-    public void createNode() throws KeeperException, InterruptedException {
-        String data = "Baymax personal assistance";
+    public void createNode(String node, String data) throws KeeperException, InterruptedException {
         CreateMode mode = CreateMode.PERSISTENT;
-        Id id = new Id("digest", "a");
-        ACL acl = new ACL(ZooDefs.Perms.ALL, id);
-        List<ACL> acls = Collections.singletonList(acl);
-        zk.create("/baymax", data.getBytes(), acls, mode);
-        zk.wait();
+        zk.create(node, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, mode);
     }
 
-    public void getNode() throws KeeperException, InterruptedException {
-        byte[] data = new byte[4 * 1024];
+    public void getNode(String node) throws KeeperException, InterruptedException {
         Stat stat = new Stat();
-        zk.getData("/sushant", false, stat);
-        System.out.println("*** STAT ****");
+        zk.getData(node, false, stat);
         System.out.println(stat.toString());
+    }
 
+    public void checkNode(String node) throws KeeperException, InterruptedException {
+        Stat stat = zk.exists(node, false);
+        System.out.println(stat);
     }
 
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
         String host = "192.168.56.111:9999";
         int to = 120000;
         ZkClient zkc = new ZkClient(host, to);
-        zkc.createNode();
-//        zkc.getNode();
+        String node = "/head-chain";
+        String data = "Hello I'm a head!";
+        zkc.createNode(node, data);
+        zkc.getNode(node);
+        zkc.checkNode(node);
     }
 }
