@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class ZkClient implements Watcher {
 
-//    private static final Logger LOG = LoggerFactory.getLogger(ZkClient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ZkClient.class);
 
     private ZooKeeper zk;
 
