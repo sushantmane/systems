@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "edu.sjsu.cs249.chain";
+
+service HeadChainReplica {
+    rpc proposeStateUpdate(HeadStateUpdateRequest) returns (ChainResponse);
+    rpc getLatestXid(LatestXidRequest) returns (LatestXidResponse);
+    rpc stateTransfer(HeadStateTransferRequest) returns (ChainResponse);
+    rpc increment(IncrementRequest) returns (HeadResponse);
+    rpc delete(DeleteRequest) returns (HeadResponse);
+    rpc get(GetRequest) returns (GetResponse);
+    rpc xidProcessed(XidProcessedRequest) returns (ChainResponse);
+}
+
+service TailChainReplica {
+    rpc proposeStateUpdate(TailStateUpdateRequest) returns (ChainResponse);
+    rpc getLatestXid(LatestXidRequest) returns (LatestXidResponse);
+    rpc stateTransfer(TailStateTransferRequest) returns (ChainResponse);
+    rpc increment(TailIncrementRequest) returns (HeadResponse);
+    rpc delete(TailDeleteRequest) returns (HeadResponse);
+    rpc get(GetRequest) returns (GetResponse);
+}
+
+service TailClient {
+    rpc cxidProcessed(CxidProcessedRequest) returns (ChainResponse);
+}
+
+package adb;
+
+// the unique name to identify the server ABD is running on
+message HeadStateUpdateRequest {
+    uint64 src = 1;
+    uint64 xid = 2;
+    string key = 3;
+    int32 value = 4;
+}
+
+// the unique name to identify the server ABD is running on
+message TailStateUpdateRequest {
+    uint64 src = 1;
+    uint64 xid = 2;
+    string key = 3;
+    int32 value = 4;
+    string host = 5;
+    int32 port = 6;
+    int32 cxid = 7;
+}
+
+message LatestXidRequest {
+}
+
+message LatestXidResponse {
+    // rc = 0 means success, rc = 1 i'm not the tail
+    uint32 rc = 1;
+    uint64 xid = 2;
+}
+
+message HeadStateTransferRequest {
+    uint64 src = 1;
+    uint64 stateXid = 2;
+    map<string, int32> state = 3;
+    repeated HeadStateUpdateRequest sent = 4;
+}
+
+message TailStateTransferRequest {
+    uint64 src = 1;
+    uint64 stateXid = 2;
+    map<string, int32> state = 3;
+    repeated TailStateUpdateRequest sent = 4;
+}
+
+message ChainResponse {
+    // rc = 0 means success, rc = 1 you shouldn't be talking to me
+    uint32 rc = 1;
+}
+
+message IncrementRequest {
+    string key = 1;
+    // if the key does not exist, it will be created with this value, otherwise the value
+    // if the existing key will be incremented by this value
+    int32 incrValue = 2;
+}
+
+message DeleteRequest {
+    // if the key does not exist, the delete will still be successful
+    string key = 1;
+}
+
+message TailIncrementRequest {
+    string key = 1;
+    // if the key does not exist, it will be created with this value, otherwise the value
+    // if the existing key will be incremented by this value
+    int32 incrValue = 2;
+    string host = 3;
+    int32 port = 4;
+    int32 cxid = 5;
+}
+
+message TailDeleteRequest {
+    // if the key does not exist, the delete will still be successful
+    string key = 1;
+    string host = 2;
+    int32 port = 3;
+    int32 cxid = 4;
+}
+
+message HeadResponse {
+    // rc = 0 means success, rc = 1 i'm not the head
+    uint32 rc = 1;
+}
+
+message GetRequest {
+    string key = 1;
+}
+
+message GetResponse {
+    // rc = 0 means success, rc = 1 i'm not the tail, rc = 2 key doesn't exist
+    uint32 rc = 1;
+    int32 value = 2;
+}
+
+message XidProcessedRequest {
+    uint64 xid = 1;
+}
+
+message CxidProcessedRequest {
+    int32 cxid = 1;
+}
