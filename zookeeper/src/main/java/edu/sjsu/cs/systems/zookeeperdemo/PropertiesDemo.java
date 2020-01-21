@@ -2,9 +2,7 @@ package edu.sjsu.cs.systems.zookeeperdemo;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 
@@ -17,11 +15,8 @@ public class PropertiesDemo {
         Properties properties = new Properties();
         properties.load(fis);
         System.out.println(properties.getProperty("server.1"));
-
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-
             System.out.println(entry.getKey() + " " + entry.getValue());
-
         }
         fis.close();
     }
