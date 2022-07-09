@@ -1,0 +1,35 @@
+{
+  "type" : "record",
+  "name" : "DeduplicatedRecord",
+  "namespace" : "edu.sjsu.cs.systems.avro",
+  "fields" : [ {
+    "name" : "chunkKey",
+    "type" : {
+      "type" : "record",
+      "name" : "ChunkKey",
+      "fields" : [ {
+        "name" : "fingerprint",
+        "type" : "string"
+      }, {
+        "name" : "hashFunction",
+        "type" : "string"
+      }, {
+        "name" : "size",
+        "type" : "long"
+      } ]
+    }
+  }, {
+    "name" : "chunkValue",
+    "type" : {
+      "type" : "record",
+      "name" : "ChunkValue",
+      "fields" : [ {
+        "name" : "data",
+        "type" : "bytes"
+      } ]
+    }
+  }, {
+    "name" : "timestamp",
+    "type" : "long"
+  } ]
+}
