@@ -4,6 +4,9 @@ Model Checking
 > Following notes are taken from the course: [Introduction to Model Checking by Prof. Joost-Pieterp Katoen](https://moves.rwth-aachen.de/teaching/ss-16/ss16introduction-to-model-checking/)
 
 
+# Introduction
+--------------
+
 ### Software Verification Techniques
 1. Peer review
 2. Testing
@@ -28,7 +31,7 @@ Model Checking
 	* method: test for `P` by `exploring possible behabiours`
 
 
----
+---	
 
 * Symbolic model checking - a method of formally checking system designs
 
@@ -49,6 +52,64 @@ Model Checking
 * Liveness: something good eventually happens
 * Faireness: if something may happen frequently, it will happen
 
+
+
+
+# Transition Systems (TS)
+-------
+
+	* extended diagraphs
+
+	```
+		real systems
+
+		|		   ^
+		|		   |
+	semantic      implementation 
+	abstractions  refinement
+
+		| 			|
+		V  			|
+		semantic model 
+
+	```
+	
+	* Semantic model - a formal representation of
+		- the states of the system
+		- the stepwise behavior
+		- the initial states
+		- additional info on
+			* communication  <-- actions
+			* state properties <-- atomic proposition
+
+
+
+# Modelling Parallel Systems
+Concurrency
+- no communication
+- sync communication
+- async communication (channel systems)
+- full communication
+
+
+#### Parallelism and Communication
+
+Goal: define semantic parallel operators on transition systems or
+program graphs that model "real" parallel operators
+```
+real parallel system
+P = P1 || ... || Pn
+
+
+transition system
+T = T1 || ... || Tn
+```
+
+
+* Interleaving operator ||| for TS
+	- interleaving of concurrent, independent actions of paralle processes
+	- representation by nondeterministic choice: "which subprocess performs the next step?"
+	- 
 
 
 
