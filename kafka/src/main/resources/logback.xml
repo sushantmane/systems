@@ -14,10 +14,13 @@
     <logger name="edu.sjsu.cs" level="TRACE" additivity="false">
         <appender-ref ref="FILE" />
     </logger>
-    <logger name="org.apache.zookeeper" level="INFO" additivity="false">
+    <logger name="org.apache.zookeeper" level="ERROR" additivity="false">
         <appender-ref ref="FILE" />
     </logger>
     <logger name="org.apache.kafka" level="TRACE" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+    <logger name="org.apache.kafka.common.metrics" level="OFF" additivity="false">
         <appender-ref ref="FILE" />
     </logger>
     <root level="ERROR">
