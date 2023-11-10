@@ -50,4 +50,16 @@ fn main() {
 
     let first_val = tup.0;
     println!("tuple: {first_val}");
+
+
+    let arr = [1, 2, 3];
+
+    let arr_with_type: [i32; 5] = [1, 2, 3, 4, 5];
+
+    // init array of size 5 with 3 as value for each element
+    let a = [3; 5];
+    let first_ele = a[0];
+    let fifth_ele = a[4];
+    println!("a[0]: {first_ele}");
+    println!("a[4]: {fifth_ele}");
 }
