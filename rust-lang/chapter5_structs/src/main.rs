@@ -34,8 +34,27 @@ fn main() {
     };
     display_user(&user_with_update_syntax);
 
-    display_user(&user_baymax_copy);
+    // display_user(&user_baymax_copy); <-- won't work because use_baymax_copy has been moved
+
+    let black_color = Color(0, 0, 0);
+    let origin = Point(0, 2, 3);
+    print_point(&origin);
+
+    let subject = AlwaysEqual;
 }
+
+// Unit-Like Structs without Any Fields
+struct AlwaysEqual;
+
+
+fn print_point(point: &Point) {
+    println!("({}, {}, {})", point.0, point.1, point.2);
+}
+
+// Tuple struct
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
 
 fn display_user(user: &User) {
     println!("{}", user.active);
