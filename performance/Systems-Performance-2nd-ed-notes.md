@@ -1,5 +1,7 @@
 # Notes on Systems Performance 2nd Ed by Brendan Gregg
 
+> Curated with the help of ChatGPT & Co-Pilot
+
 ## Chapter 1: Introduction
 
 ### Perspectives
@@ -25,3 +27,28 @@
 
 
 ## Chapter 2: Methodologies
+
+### Key Performance Metrics
+- Focus on latency, utilization, and saturation.
+
+### Terminology
+- **Latency:** The time it takes to service a request.
+- **Utilization:** The percentage of time a resource is busy servicing requests.
+- **Saturation:** The degree to which a resource has extra work it can't service, often queued.
+- **Response Time:** The time it takes to service a request, including queueing delay.
+- **Workload:** The amount of work being done by a system.
+- **IOPS:** Input/Output Operations Per Second - read/write operations per second.
+- **Throughput:** The amount of data read/written per second or the number of operations per second.
+
+### Models
+- **SUT:** System Under Test
+- **Queueing System Model:** A model of a system with a queue, where requests arrive, wait in a queue, and are serviced by a resource.
+```bash
+                  Queue
+                 +-+-+-+        +---------+        
+ Arrival  -----> | | | | -----> |         |
+                 +-+-+-+        | Service |
+                                | Center  |
+ Departure <------------------- |         |
+                                +---------+     
+```
