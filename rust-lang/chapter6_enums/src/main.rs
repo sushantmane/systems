@@ -59,7 +59,36 @@ fn main() {
 
     let black = Message::ChangeColor(0, 0, 0);
     black.display();
+
+    // custom
+    let x: Optional<i32> = Optional::None;
+    println!("optional x: {:?}", x);
+
+    let x = Optional::Some(String::from("big bang theory"));
+    println!("optional x: {:?}", x);
+
+
+    // Option from lib
+    let some_num = Some(5);
+    let some_char = Some('c');
+    let absent_number: Option<i32> = None;
+    println!("option: {:?} - {} - {}",
+             some_num, some_num.is_some(), some_num.expect("Failed to get the value"));
+    println!("option: {:?} - {} - {}",
+             some_char, some_char.is_some(), some_char.expect("Failed to get the value"));
+    println!("option: {:?} - {}", absent_number, absent_number.is_some());
+    // absent_number.expect("value is not present!!!"); <-- panic
+
+
 }
+
+// The Option Enum
+#[derive(Debug)]
+enum Optional<T> {
+    None,
+    Some(T),
+}
+
 
 #[derive(Debug)]
 enum IpAddrType {
