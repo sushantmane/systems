@@ -34,3 +34,14 @@ $ cat /proc/net/tcp       # TCP connections
 $ cat /proc/net/udp       # UDP connections
 $ cat /proc/net/icmp      # ICMP connections
 ```
+
+
+
+### Check the health of a disk
+
+smartctl: smartctl is a command-line utility used to check and monitor the health of storage devices using SMART (Self-Monitoring, Analysis, and Reporting Technology). 
+
+```bash
+Copy code
+sudo smartctl -a /dev/sdX
+```
