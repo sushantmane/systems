@@ -27,4 +27,33 @@ fn main() {
         Some(t) => println!("third: {t}"),
         None => println!("there is no third element"),
     }
+
+
+    let mut v = vec![1, 2, 3, 4, 5];
+    let first = &v[0];
+    v.push(6);
+    // println!("1st: {first}"); <-- invalid
+    for i in &v {
+        println!("{i}");
+    }
+
+    // mutable
+    for i in &mut v {
+        *i += 50;
+        println!("{i}");
+    }
+
+   #[derive(Debug)]
+    enum Cell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![Cell::Int(1),
+                    Cell::Text(String::from("test")),
+                    Cell::Float(10.12)];
+    for r in &row {
+        println!("r: {:?}", r);
+    }
 }
