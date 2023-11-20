@@ -50,5 +50,29 @@ pub fn string_basics() {
 
 
 pub fn string_indexing() {
+    let s1 = String::from("hello");
+    let h = &s1[0..1];
+    dbg!(&h);
+
+    let namaste = String::from("नमस्ते");
+    dbg!(&namaste);
+    dbg!(namaste.len());
+    let np = &namaste[6..9]; // <-- bad idea
+    dbg!(&np);
+
+    for char in namaste.chars() {
+       println!("{char}");
+    }
+
+
+    for byte in namaste.bytes() {
+        println!("{byte}");
+    }
+
+    dbg!(namaste.contains("स")); // true
+    dbg!(namaste.contains("स्ते")); // true
+    let n1 = namaste.replace("स्ते", ":");
+    dbg!(&n1);
+    dbg!(&namaste);
 
 }
