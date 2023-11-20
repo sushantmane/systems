@@ -4,5 +4,7 @@ mod string;
 fn main() {
     // vector::vector_experiments();
 
-    string::string_basics();
+    // string::string_basics();
+
+    string::string_indexing();
 }
