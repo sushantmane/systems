@@ -74,5 +74,5 @@ pub fn string_indexing() {
     let n1 = namaste.replace("स्ते", ":");
     dbg!(&n1);
     dbg!(&namaste);
-
+//
 }
