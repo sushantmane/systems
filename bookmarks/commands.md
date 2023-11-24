@@ -37,11 +37,12 @@ $ cat /proc/net/icmp      # ICMP connections
 
 
 
-### Check the health of a disk
+### Checking Disk Health using Smartctl
 
-smartctl: smartctl is a command-line utility used to check and monitor the health of storage devices using SMART (Self-Monitoring, Analysis, and Reporting Technology). 
+Smartctl is a command-line utility designed to assess and monitor the condition of storage devices through SMART (Self-Monitoring, Analysis, and Reporting Technology).
 
 ```bash
-Copy code
 sudo smartctl -a /dev/sdX
 ```
+
+Replace `/dev/sdX` with the appropriate device identifier (e.g., `/dev/sda`). This command retrieves detailed information regarding the health and status of the specified disk.
