@@ -8,7 +8,6 @@ pub fn learn_hashmap() {
     scores.insert(String::from("b1"), 20);
     scores.insert(String::from("c1"), 30);
 
-
     dbg!(&scores);
 
     let team_name = String::from("a1");
@@ -21,7 +20,6 @@ pub fn learn_hashmap() {
 
     dbg!(&score);
 
-
     let score = scores.get(&team_name).copied().unwrap_or(0);
     println!("{score}");
 
@@ -29,7 +27,6 @@ pub fn learn_hashmap() {
     for (k, v) in &scores {
         println!("{k} - {v}");
     }
-
 
     // Hash Maps and Ownership
     let mut map = HashMap::new();
@@ -40,12 +37,11 @@ pub fn learn_hashmap() {
 
     // map.insert(f1_name, f1_val); // <== non allowed since map is HashMap<&String, &String> and not <String, String>
 
-
     let mut map = HashMap::new();
     let f1_name = String::from("fav color");
     let f1_val = String::from("Blue");
     map.insert(f1_name, f1_val); // <== ownership transfer
-    // println!("{f1_name} {f1_val}"); <== illegal
+                                 // println!("{f1_name} {f1_val}"); <== illegal
     dbg!(&map);
 
     let mut color_scores = HashMap::new();

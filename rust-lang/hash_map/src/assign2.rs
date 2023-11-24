@@ -13,14 +13,34 @@ pub fn add_employee(query: &str, db: &mut HashMap<String, Vec<String>>) {
     dbg!(&db);
 }
 
-pub fn get_emps_by_dept(dept: &str, db: &HashMap<String, Vec<String>>) -> Vec<String> {
-    let res = db.get(&dept);
-    let res = match res {
+pub fn get_emp_by_dept(dept: &str, db: &HashMap<String, Vec<String>>) -> Vec<String> {
+    let val = db.get(dept);
+    let res = match val {
         Some(mut v) => {
-            v.sort();
-            v
-        },
+            let mut vc = v.clone();
+            vc.sort();
+            vc
+        }
         None => Vec::new(),
     };
-    return res;
+
+    res
+}
+
+pub fn get_all_people(db: &HashMap<String, Vec<String>>) -> Vec<Vec<String>> {
+    let mut res: Vec<Vec<String>> = vec![];
+    let mut keys: Vec<String> = vec![];
+    for key in db.keys() {
+        keys.push(String::from(key));
+    }
+    keys.sort();
+
+    for key in keys {
+        let val = db.get(&key).unwrap();
+        let mut val_cp = val.clone();
+        val_cp.sort();
+        res.push(val_cp);
+    }
+
+    res
 }

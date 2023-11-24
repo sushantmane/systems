@@ -15,10 +15,9 @@ fn get_median(lst: &Vec<i32>) -> i32 {
     lst[mid]
 }
 
-
 fn get_mode(lst: &Vec<i32>) -> i32 {
     let mut frq = HashMap::new();
-    let mut mode:Option<i32> = None;
+    let mut mode: Option<i32> = None;
     let mut mode_frq = 0;
 
     for &i in lst {

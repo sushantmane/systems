@@ -7,7 +7,8 @@ pub fn convert_to_pig_latin(in_str: &str) {
             || word.starts_with("e")
             || word.starts_with("i")
             || word.starts_with("o")
-            || word.starts_with("u") {
+            || word.starts_with("u")
+        {
             res.push_str(&format!("{word}-hay"));
         } else {
             res.push_str(&format!("{}-{}ay", &word[1..], &word[0..1]));
