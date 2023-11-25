@@ -1,7 +1,7 @@
 // A half-hour to learn Rust
 
 use std::cmp::max;
-use std::ops::Add;
+use std::ops::{Add, Neg};
 
 fn main() {
     // variables
@@ -136,6 +136,98 @@ fn main() {
     println!("{} {} {}", x, y, z);
     let Vec2 { x, .. } = v3;
     dbg!(x);
+
+    // `let` patterns can be used as conditions in `if`
+    let one = Number { odd: true, val: 1 };
+    let two = Number { odd: false, val: 2 };
+    print_number(&one);
+    print_number(&two);
+
+    // `match` arms are also patterns
+    print_number_match(&one);
+    print_number_match(&two);
+
+    // `_` can be used as a catch-all pattern
+    match one.val {
+        1 => println!("one"),
+        2 => println!("two"),
+        _ => println!("nd"),
+    }
+
+    let minus_two = Number {
+        odd: false,
+        val: -2,
+    };
+    println!("1 is_strictly_positive: {}", one.is_strictly_positive());
+    println!(
+        "-2 is_strictly_positive: {}",
+        minus_two.is_strictly_positive()
+    );
+    println!("-2 is_strictly_negative: {}", two.is_strictly_negative());
+    println!("-2 is_strictly_negative: {}", i32::is_strictly_negative(-2));
+
+    let three = Number { val: 3, odd: true };
+
+    println!("neg of 3: {:?}", three.neg());
+}
+
+// traits are something multiple types can have in common
+trait Signed {
+    fn is_strictly_negative(self) -> bool;
+}
+
+// our trait on our type
+impl Signed for Number {
+    fn is_strictly_negative(self) -> bool {
+        self.val < 0
+    }
+}
+
+// our trait on foreign type
+impl Signed for i32 {
+    fn is_strictly_negative(self) -> bool {
+        self < 0
+    }
+}
+
+// foreign train on our type
+impl std::ops::Neg for Number {
+    type Output = Number;
+
+    fn neg(self) -> Number {
+        Number {
+            val: -self.val,
+            odd: self.odd,
+        }
+    }
+}
+
+// declare methods
+#[derive(Debug)]
+struct Number {
+    odd: bool,
+    val: i32,
+}
+
+impl Number {
+    fn is_strictly_positive(self) -> bool {
+        self.val > 0
+    }
+}
+
+fn print_number(n: &Number) {
+    if let Number { odd: true, val } = n {
+        println!("Odd number: {}", val);
+    } else if let Number { odd: false, val } = n {
+        println!("Even number: {}", val);
+    }
+}
+
+fn print_number_match(n: &Number) {
+    match n {
+        Number { odd: true, val } => println!("M:Odd number: {}", val),
+        Number { odd: false, val } => println!("M:Even number: {}", val),
+    }
 }
 
 fn greet() {
