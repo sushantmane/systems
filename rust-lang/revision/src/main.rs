@@ -172,6 +172,8 @@ fn main() {
 
 
     let n = Number {odd: true, val: 51};
+
+    // when invoking trait methods, the receiver is borrowed implicitly
     // let mut m = n.clone();
     let mut m = std::clone::Clone::clone(&n);
     m.val += 100;
@@ -181,6 +183,8 @@ fn main() {
     print_number1(&m);
 }
 
+
+// trait methods can also take `self` by reference or mutable reference
 impl std::clone::Clone for Number {
     fn clone(&self) -> Self {
         Self { ..*self}
