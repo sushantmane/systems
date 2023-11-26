@@ -169,7 +169,22 @@ fn main() {
     let three = Number { val: 3, odd: true };
 
     println!("neg of 3: {:?}", three.neg());
+
+
+    let n = Number {odd: true, val: 51};
+    // let mut m = n.clone();
+    let mut m = std::clone::Clone::clone(&n);
+    m.val += 100;
+    dbg!(&n);
+    dbg!(&m);
 }
+
+impl std::clone::Clone for Number {
+    fn clone(&self) -> Self {
+        Self { ..*self}
+    }
+}
+
 
 // traits are something multiple types can have in common
 trait Signed {
@@ -192,10 +207,13 @@ impl Signed for i32 {
 
 // foreign train on our type
 impl std::ops::Neg for Number {
-    type Output = Number;
+    // type Output = Number;
+    type Output = Self;
 
-    fn neg(self) -> Number {
-        Number {
+    // fn neg(self) -> Number {
+    fn neg(self) -> Self {
+        // Number {
+        Self {
             val: -self.val,
             odd: self.odd,
         }

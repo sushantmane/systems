@@ -7,4 +7,6 @@
     - one of your traits on anyone's type
     - anyone's trait on one of your types
     - but not a foreign trait on a foreign type
- 
+ - `impl` block is always for a type; inside that block, `Self` refers to that type
+ - Some `traits` are marker
+ - Trait methods can take `self` by reference or mutable reference
