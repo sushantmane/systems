@@ -177,12 +177,19 @@ fn main() {
     m.val += 100;
     dbg!(&n);
     dbg!(&m);
+
+    print_number1(&m);
 }
 
 impl std::clone::Clone for Number {
     fn clone(&self) -> Self {
         Self { ..*self}
     }
+}
+
+
+fn print_number1(n: &Number) {
+    println!("{} is {} number", n.val, if n.odd { "odd"} else { "even" });
 }
 
 
