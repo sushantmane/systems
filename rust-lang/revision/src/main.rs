@@ -181,6 +181,13 @@ fn main() {
     dbg!(&m);
 
     print_number1(&m);
+
+
+    // after adding marker trait; values will not be moved instead they will be copied
+    let mc = m;
+    print_number1(&m);
+    print_number1(&mc);
+
 }
 
 
@@ -190,6 +197,9 @@ impl std::clone::Clone for Number {
         Self { ..*self}
     }
 }
+
+// Marker traits like `Copy` have no methods
+// impl std::marker::Copy for Number {}
 
 
 fn print_number1(n: &Number) {
@@ -231,8 +241,8 @@ impl std::ops::Neg for Number {
     }
 }
 
-// declare methods
-#[derive(Debug)]
+// Some traits are common, they can implemented automatically by using the `derive` attribute
+#[derive(Debug, Copy)]
 struct Number {
     odd: bool,
     val: i32,
