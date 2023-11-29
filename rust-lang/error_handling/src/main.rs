@@ -2,7 +2,8 @@
 // - recoverable vs unrecoverable
 
 use std::fs::File;
-use std::io::ErrorKind;
+use std::io::{self, Error};
+use std::io::{ErrorKind, Read};
 
 fn main() {
     // panic!("crash and burn");
@@ -36,7 +37,7 @@ fn main() {
     let fh = File::open("hello.txt").unwrap_or_else(|err| {
         if err.kind() == ErrorKind::NotFound {
             File::create("hello.txt").unwrap_or_else(|err| {
-               panic!("Failed to create the file: {:?}", err);
+                panic!("Failed to create the file: {:?}", err);
             })
         } else {
             panic!("Failed to open the file: {:?}", err);
@@ -48,12 +49,29 @@ fn main() {
     // let fh = File::open("hello.txt").unwrap();
 
     // expect is preferred way
-    let fh = File::open("hello.dat").expect("hello.dat should be included in the project");
+    // let fh = File::open("hello.dat").expect("hello.dat should be included in the project");
 
-
-
+    // Propagating Errors
+    let result = read_username_from_file();
+    dbg!(result);
 }
 
+fn read_username_from_file() -> Result<String, io::Error> {
+    let uname_res = File::open("user.dat");
+    // let uname_res = File::open("invalid.txt");
+
+    let mut uname_file = match uname_res {
+        Ok(f) => f,
+        Err(e) => return Err(e),
+    };
+
+    let mut uname = String::new();
+
+    match uname_file.read_to_string(&mut uname) {
+        Ok(_) => Ok(uname),
+        Err(e) => Err(e),
+    }
+}
 
 fn print_type<T>(arg: &T) {
     println!("{}", std::any::type_name::<T>());
