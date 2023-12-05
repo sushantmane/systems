@@ -2,7 +2,11 @@ pub trait Summary {
     fn summarize(&self) -> String;
 
     fn default_display(&self) -> String {
-        String::from("Read more")
+        self.summarize()
+    }
+
+    fn summarize_author(&self) -> String {
+        String::from("anony")
     }
 }
 
@@ -33,5 +37,9 @@ impl Summary for Tweet {
 
     fn default_display(&self) -> String {
         String::from("overridden")
+    }
+
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
     }
 }

@@ -3,6 +3,7 @@
 use crate::lib::{NewsArticle, Summary, Tweet};
 
 mod lib;
+mod news;
 
 fn main() {
     let tweet = Tweet {
@@ -23,5 +24,5 @@ fn main() {
     };
 
     println!("New article: {}", article.summarize());
-    println!("New article: {}", article.default_display());
+    println!("Display article: {}", article.default_display());
 }
