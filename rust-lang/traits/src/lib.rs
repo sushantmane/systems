@@ -1,3 +1,5 @@
+use std::fmt::{Debug, Display};
+
 pub trait Summary {
     fn summarize(&self) -> String;
 
@@ -45,6 +47,38 @@ impl Summary for Tweet {
 }
 
 // Traits as Parameters
-pub fn notify<T: Summary>(item: &T) {
+pub fn notify1(item: &impl Summary) {
     println!("Breaking news! {}", item.summarize());
+}
+
+pub fn notify2<T: Summary>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+pub fn notify3(item: &(impl Summary + Display)) {
+    println!("Breaking news! {}", item.summarize());
+}
+pub fn notify4<T: Summary + Display>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+fn some_funct1<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+    -1
+}
+
+fn some_funct2<T, U>(t: &T, u: &U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{
+    -1
+}
+
+fn return_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("admin"),
+        content: String::from("test"),
+        reply: false,
+        retweet: false,
+    }
 }
