@@ -26,3 +26,4 @@ fn main() {
     println!("New article: {}", article.summarize());
     println!("Display article: {}", article.default_display());
 }
+

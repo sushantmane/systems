@@ -103,3 +103,8 @@ impl<T: Display + PartialOrd> Pair<T> {
         }
     }
 }
+
+// blanket traits
+// impl<T: Display> ToString for T {
+//     //
+// }
